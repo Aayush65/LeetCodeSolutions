@@ -9,8 +9,11 @@ class Solution:
                 if pos == endPos and k == steps:
                     return 1
                 return 0
-            res = dp(pos - 1, steps + 1)
-            res += dp(pos + 1, steps + 1)
+            res = 0
+            if pos < endPos and endPos - pos < k or pos >= endPos:
+                res += dp(pos - 1, steps + 1)
+            if pos > endPos and pos - endPos < k or pos <= endPos:
+                res += dp(pos + 1, steps + 1)
             memo[(pos, steps)] = res
             return res
             
