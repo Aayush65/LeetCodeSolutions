@@ -17,12 +17,7 @@ class Solution:
             maxX = max(maxX, x)
 
             if x in xAxis:
-                last = node.val
-                if xAxis[x][-1][0] == y:
-                    last = max(xAxis[x][-1][1], node.val)
-                    first = min(xAxis[x][-1][1], node.val) 
-                    xAxis[x][-1][1] = first
-                xAxis[x].append([y, last])
+                xAxis[x].append([y, node.val])
             else:
                 xAxis[x] = [[y, node.val]]
             if node.left:
