@@ -25,12 +25,8 @@ class Solution:
         
         for i, j in edges:
             union(i, j)
-        sizes = []
-        for i in rank:
-            if i:
-                sizes.append(i)
         
         count = 0
-        for i in sizes:
+        for i in rank:
             count += i * (n - i)
         return count // 2
