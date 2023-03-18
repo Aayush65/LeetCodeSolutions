@@ -7,7 +7,7 @@ class Solution:
             return count >= cars
             
         lo = min(ranks)
-        hi = max(ranks) * (cars ** 2)
+        hi = min(ranks) * (cars ** 2)
         while lo < hi:
             mid = (lo + hi) // 2
             if check(mid):
