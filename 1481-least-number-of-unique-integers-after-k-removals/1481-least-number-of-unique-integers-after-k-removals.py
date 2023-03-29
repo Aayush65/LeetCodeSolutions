@@ -4,10 +4,10 @@ class Solution:
         for i in arr:
             hm[i] += 1
         
-        arr = [[hm[i], i] for i in hm]
+        arr = [hm[i] for i in hm]
         arr.sort()
         count = 0
-        for i, j in arr:
+        for i in arr:
             if k:
                 if k >= i:
                     k -= i
