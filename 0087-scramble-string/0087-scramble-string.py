@@ -5,14 +5,15 @@ class Solution:
             return False
         if len(s1) == 1:
             return True
-        map1 = defaultdict(int)
-        startMap = defaultdict(int)        
-        endMap = defaultdict(int)
-            
+        map1 = [0] * 26
+        startMap = [0] * 26        
+        endMap = [0] * 26
+        indexOf = lambda x: ord(x) - ord('a')
+        
         for i in range(len(s1) - 1):
-            map1[s1[i]] += 1
-            startMap[s2[i]] += 1
-            endMap[s2[-i - 1]] += 1
+            map1[indexOf(s1[i])] += 1
+            startMap[indexOf(s2[i])] += 1
+            endMap[indexOf(s2[-i - 1])] += 1
             if map1 == startMap and \
                 self.isScramble(s1[:i + 1], s2[:i + 1]) and \
                 self.isScramble(s1[i + 1:], s2[i + 1:]):
