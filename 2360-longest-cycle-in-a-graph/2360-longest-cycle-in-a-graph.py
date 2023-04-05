@@ -1,19 +1,18 @@
 class Solution:
     def longestCycle(self, edges: List[int]) -> int:
-        longest_cycle_len = -1
-        time_step = 1
-        node_visited_at_time = [0] * len(edges)
-
-        for current_node in range(len(edges)):
-            if node_visited_at_time[current_node] > 0:
+        maxLen = 0
+        loopsLen = [-1] * len(edges)
+        for i in range(len(edges)):
+            if loopsLen[i] != -1:
                 continue
-            start_time = time_step
-            u = current_node
-            while u != -1 and node_visited_at_time[u] == 0:
-                node_visited_at_time[u] = time_step
-                time_step += 1
-                u = edges[u]
-            if u != -1 and node_visited_at_time[u] >= start_time:
-                longest_cycle_len = max(longest_cycle_len, time_step - node_visited_at_time[u])
-
-        return longest_cycle_len
+            length = 0
+            tempI = i
+            visited = set()
+            while tempI > -1 and loopsLen[tempI] == -1 and tempI not in visited:
+                visited.add(tempI)
+                loopsLen[tempI] = length
+                tempI = edges[tempI]
+                length += 1
+            if tempI != -1 and tempI in visited:
+                maxLen = max(maxLen, length - loopsLen[tempI])
+        return maxLen if maxLen else -1
