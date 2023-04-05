@@ -4,5 +4,5 @@ class Solution:
         total = nums[0]
         for i in range(1, len(nums)):
             total += nums[i]
-            maximum = max(maximum, (total + i)//(i+1))
-        return maximum
+            maximum = max(maximum, ceil(total /(i+1)))
+        return maximum 
