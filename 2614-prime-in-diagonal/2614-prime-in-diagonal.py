@@ -5,17 +5,17 @@ class Solution:
             diag.add(nums[i][i])
             diag.add(nums[i][len(nums) - i - 1])
         
-        maxNum = max(diag)
-        primes = {i for i in range(2, maxNum + 1)}
-        for i in range(2, maxNum + 1):
-            if i not in primes:
+        maxNum = max(diag) + 1
+        primes = [True for i in range(maxNum)]
+        primes[0] = primes[1] = False
+        for i in range(2, maxNum):
+            if not primes[i]:
                 continue
-            for j in range(i * i, maxNum + 1, i):
-                if j in primes:
-                    primes.remove(j)
+            for j in range(i * i, maxNum, i):
+                primes[j] = False
         
         maxPrime = 0
         for i in diag:
-            if i in primes:
+            if primes[i]:
                 maxPrime = max(maxPrime, i)
         return maxPrime
