@@ -16,6 +16,6 @@ class Solution:
         res = 0
         for i in range(n):
             if dp1[i] and dp2[i]:
-                res = max(res, dp1[i] + dp2[i])
+                res = max(res, dp1[i] + dp2[i] + 1)
 
-        return n - res - 1
+        return n - res
