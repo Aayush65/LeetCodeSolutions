@@ -4,9 +4,6 @@ class Graph:
         self.nodeMap = {i: set() for i in range(n)}
         for i, j, w in edges:
             self.nodeMap[i].add((j, w))
-        self.dists = [[float("inf")] * n for i in range(n)]
-        for i in range(n):
-            self.dists[i][i] = 0
         
     def addEdge(self, edge: List[int]) -> None:
         self.nodeMap[edge[0]].add((edge[1], edge[2]))
