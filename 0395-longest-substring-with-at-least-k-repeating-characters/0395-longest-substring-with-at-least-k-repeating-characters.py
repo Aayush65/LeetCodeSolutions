@@ -1,4 +1,5 @@
 class Solution:
+    @cache
     def longestSubstring(self, s: str, k: int) -> int:
         maxLen = 0
         freqMap = [0] * 26
