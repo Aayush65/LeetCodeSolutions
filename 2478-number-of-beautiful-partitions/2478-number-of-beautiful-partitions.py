@@ -6,7 +6,7 @@ class Solution:
         if s[0] not in primes or s[-1] in primes:
             return 0
 
-        dividers = []
+        dividers = [0]
         for i in range(len(s) - 1):
             if s[i] not in primes and s[i + 1] in primes:
                 dividers.append(i + 1)
@@ -14,15 +14,13 @@ class Solution:
         @cache
         def dp(index: int, k: int) -> int:
             if k == 0:
-                if len(s) - index >= minLength:
+                if len(s) - dividers[index] >= minLength:
                     return 1
                 return 0
-            if index == len(s):
-                return 0
             res = 0
-            for i in range(len(dividers) - k + 1):
-                if dividers[i] - index >= minLength:
-                    res += dp(dividers[i], k - 1)
+            for i in range(index + 1, len(dividers) - k + 1):
+                if dividers[i] - dividers[index] >= minLength:
+                    res += dp(i, k - 1)
             return res % mod
 
         return dp(0, k - 1)
