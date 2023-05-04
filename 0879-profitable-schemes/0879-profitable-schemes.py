@@ -1,18 +1,40 @@
+# class Solution:
+#     def profitableSchemes(self, n: int, minProfit: int, group: List[int], profit: List[int]) -> int:
+#         crimes = [(noOfCriminals, profits) for noOfCriminals, profits in zip(group, profit)]
+#         crimes.sort(key = lambda x: [x[0], -x[1]])
+#         mod = 1000000007
+        
+#         @cache
+#         def dp(index: int, n: int, score: int) -> int:
+#             if index == len(crimes) or n < crimes[index][0]:
+#                 return 1 if score >= minProfit else 0
+#             res = dp(index + 1, n, score) + dp(index + 1, n - crimes[index][0], min(score + crimes[index][1], minProfit))
+#             return res % mod
+            
+#         return dp(0, n, 0)
+
 class Solution:
     def profitableSchemes(self, n: int, minProfit: int, group: List[int], profit: List[int]) -> int:
-        MOD = 10**9 + 7
+
+
+        @cache
+        def dfs(i, members, cur_profit):
+
+            if i >= len(profit):
+                if cur_profit >= minProfit and members <= n:
+                    return 1
+                else:
+                    return 0
+                   
+                
+            ans = 0
+            ans += dfs(i + 1, members, cur_profit)
+            
+            if members + group[i] <= n:
+
+                ans += dfs(i + 1, members + group[i], min(cur_profit + profit[i], minProfit))
         
-        length = len(group)
-        dp = [[[0] * (minProfit + 1) for _ in range(n + 1)] for _ in range(length + 1)]
-        dp[0][0][0] = 1
-        for i in range(1, length + 1):
-            members, earn = group[i - 1], profit[i - 1]
-            for j in range(n + 1):
-                for k in range(minProfit + 1):
-                    if j < members:
-                        dp[i][j][k] = dp[i - 1][j][k]
-                    else:
-                        dp[i][j][k] = (dp[i - 1][j][k] + dp[i - 1][j - members][max(0, k - earn)]) % MOD
+            return ans
+            
+        return dfs(0, 0, 0) % (10**9 + 7)
         
-        total = sum(dp[length][j][minProfit] for j in range(n + 1))
-        return total % MOD
