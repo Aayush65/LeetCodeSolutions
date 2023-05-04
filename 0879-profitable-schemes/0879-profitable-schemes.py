@@ -6,7 +6,7 @@ class Solution:
         
         @cache
         def dp(index: int, n: int, score: int) -> int:
-            if index == len(crimes) or n < crimes[index][0]:
+            if index == len(crimes):
                 return 1 if score >= minProfit else 0
             res = dp(index + 1, n, score)
             if n >= crimes[index][0]:
