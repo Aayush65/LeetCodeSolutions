@@ -14,6 +14,6 @@ class Solution:
         else:
             median1 = nums[len(nums) // 2]
             median2 = nums[len(nums) // 2 - 1]
-            median3 = (median1 + median2) // 2
-            median4 = ceil((median1 + median2) / 2)
-            return min(toChange(median1), toChange(median2), toChange(median3), toChange(median4))
+            # median3 = (median1 + median2) // 2
+            # median4 = ceil((median1 + median2) / 2)
+            return min(toChange(median1), toChange(median2)) #, toChange(median3), toChange(median4))
