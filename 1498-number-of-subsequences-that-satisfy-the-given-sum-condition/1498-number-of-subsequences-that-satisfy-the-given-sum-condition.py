@@ -1,18 +1,14 @@
 class Solution:
     def numSubseq(self, nums: List[int], target: int) -> int:
-        res, mod = 0, 1000000007
-        l, r = 0, len(nums) - 1
-        pre = [1]
-        for i in range(1, len(nums) + 1):
-            pre.append((pre[-1] << 1) % mod)
-                
+        mod = 1000000007
         nums.sort()
         
-        while l <= r:
-            if nums[l] + nums[r] > target:
-                r -= 1
+        subsequences = 0
+        i, j = 0, len(nums) - 1
+        while i <= j:
+            if nums[i] + nums[j] > target:
+                j -= 1
             else:
-                res = (res + pre[r - l]) % mod
-                l += 1
-
-        return res
+                subsequences += (2 ** (j - i)) % mod
+                i += 1
+        return subsequences % mod
