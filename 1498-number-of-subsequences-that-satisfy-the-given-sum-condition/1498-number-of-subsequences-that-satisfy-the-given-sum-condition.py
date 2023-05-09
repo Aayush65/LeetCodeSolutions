@@ -9,6 +9,6 @@ class Solution:
             if nums[i] + nums[j] > target:
                 j -= 1
             else:
-                subsequences += (2 ** (j - i)) % mod
+                subsequences += pow(2, j - i, mod)
                 i += 1
         return subsequences % mod
