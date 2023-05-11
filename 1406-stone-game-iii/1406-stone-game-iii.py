@@ -3,11 +3,13 @@ class Solution:
         preSum = [0]
         for i in stoneValue:
             preSum.append(preSum[-1] + i)
-            
-        @cache
+
+        memo = [-float("inf")] * len(stoneValue)
         def dp(index: int) -> int:
             if index == len(stoneValue):
                 return 0
+            if memo[index] != -float("inf"):
+                return memo[index]
             stones = 0
             res = -float("inf")
             for i in range(index, min(len(stoneValue), index + 3)):
@@ -15,8 +17,9 @@ class Solution:
                 otherPlayer = dp(i + 1)
                 score = preSum[-1] - preSum[i + 1] - otherPlayer
                 res = max(res, score + stones)
+            memo[index] = res
             return res
-            
+
         alice = dp(0)
         if alice == preSum[-1] / 2:
             return "Tie"
