@@ -1,7 +1,6 @@
 class Solution:
     def findSmallestSetOfVertices(self, n: int, edges: List[List[int]]) -> List[int]:
         par = [i for i in range(n)]
-        rank = [1] * n
         
         def find(n: int) -> int:
             while n != par[n]:
@@ -14,15 +13,11 @@ class Solution:
             if p2 != n2:
                 return
             par[p2] = p1
-            rank[p1] += rank[p2]
-            rank[p2] = 0
         
         for i, j in edges:
             union(i, j)
-        print(par, rank)
         
-        requiredStarts = []
+        res = set()
         for i in range(n):
-            if rank[i]:
-                requiredStarts.append(i)
-        return requiredStarts
+            res.add(find(i))
+        return res
