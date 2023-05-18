@@ -14,10 +14,13 @@ class Solution:
                 return
             par[p2] = p1
         
+        res = {i for i in range(n)}
         for i, j in edges:
-            union(i, j)
+            if j in res:
+                res.remove(j)
+            # union(i, j)
         
-        res = set()
-        for i in range(n):
-            res.add(find(i))
+        # res = set()
+        # for i in range(n):
+        #     res.add(find(i))
         return res
