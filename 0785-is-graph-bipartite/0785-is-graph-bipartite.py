@@ -11,7 +11,7 @@ class Solution:
                 for nei in graph[node]:
                     if color[nei] == color[node]:
                         return False
-                    if color[nei] != color[node] * -1:
+                    if color[nei] == 0:
                         color[nei] = color[node] * -1
                         q.append(nei)
         return True
