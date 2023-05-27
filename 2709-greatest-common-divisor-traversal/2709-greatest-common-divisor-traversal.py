@@ -1,8 +1,10 @@
 class Solution:
     def canTraverseAllPairs(self, nums: List[int]) -> bool:
-        if 1 in nums and len(nums) != 1:
-            return False
+        if len(nums) == 1:
+            return True
         nums = set(nums)
+        if 1 in nums:
+            return False
         nums = list(nums)
         
         factors = set()
