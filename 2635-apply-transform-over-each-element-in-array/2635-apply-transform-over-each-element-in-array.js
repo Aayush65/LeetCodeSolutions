@@ -4,6 +4,8 @@
  * @return {number[]}
  */
 var map = function(arr, fn) {
-    arr = arr.map(fn);
-    return arr
+    const res = [];
+    for (let i in arr)
+        res.push(fn(arr[i], Number(i)));
+    return res;
 };
