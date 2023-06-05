@@ -4,7 +4,6 @@
  * @return {Function}
  */
 var debounce = function(fn, t) {
-    let isRunning = false;
     let currentRunning;
     
     return async function(...args) {
