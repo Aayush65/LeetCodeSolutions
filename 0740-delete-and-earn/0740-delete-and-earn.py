@@ -5,23 +5,20 @@ class Solution:
             numsMap[i] += 1
         nums = sorted(list(set(nums)))
 
-        memo = {}
-        visited = set()
-
+        @cache
         def dp(index: int) -> int:
             if index == len(nums):
                 return 0
-            if nums[index] - 1 in visited:
-                return dp(index + 1)
-            if index in memo:
-                return memo[index]
+            score = 0
 
-            visited.add(nums[index])
-            score = dp(index + 1) + nums[index] * numsMap[nums[index]]
-            visited.remove(nums[index])
-            
-            score = max(score, dp(index + 1))
-            memo[index] = score
+            score = nums[index] * numsMap[nums[index]]
+            if index + 1 < len(nums):
+                if nums[index + 1] == nums[index] + 1:
+                    score += dp(index + 2)
+                    score = max(score, dp(index + 1))
+                else:
+                    score += dp(index + 1)
+
             return score
 
         return dp(0)
