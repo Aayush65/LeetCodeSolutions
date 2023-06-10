@@ -10,7 +10,7 @@ class Solution:
         nums.sort()
         total = 0
         ans = 0
-        for i in range(len(nums)):
+        for i in range(len(s)):
             ans += nums[i] * i - total
             ans %= mod
             total += nums[i]
