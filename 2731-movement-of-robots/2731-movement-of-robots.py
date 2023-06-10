@@ -14,4 +14,4 @@ class Solution:
             ans += nums[i] * i - total
             ans %= mod
             total += nums[i]
-        return ans
+        return ans % mod
