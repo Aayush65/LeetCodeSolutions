@@ -9,7 +9,7 @@ public:
         long long ans = 0;
         long long pref = 0;
         sort(nums.begin(), nums.end());
-        long long n = s.length()-1;
+        // long long n = s.length()-1;
         for(long long i = 0; i < nums.size(); i++){
             ans += i * (long long) nums[i] - pref;
             ans %= MOD;
