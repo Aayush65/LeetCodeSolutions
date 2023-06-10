@@ -1,19 +1,23 @@
 class Solution:
     def goodSubsetofBinaryMatrix(self, grid: List[List[int]]) -> List[int]:
         nums = []
-        for i in grid:
+        hs = set()
+        for i in range(len(grid)):
             num = 0
             bitIdx = 0
-            for j in i[::-1]:
+            for j in grid[i][::-1]:
                 num += j * (2 ** bitIdx)
                 bitIdx += 1
-            nums.append(num)
-        
+            if not num:
+                return [i]
+            if num in hs:
+                continue
+            hs.add(num)
+            nums.append((num, i))
+
         res = []
         for i in range(len(nums)):
-            if not nums[i]:
-                return [i]
             for j in range(len(nums)):
-                if nums[i] & nums[j] == 0:
-                    return sorted([i, j])
+                if nums[i][0] & nums[j][0] == 0:
+                    return sorted([nums[i][1], nums[j][1]])
         return []
