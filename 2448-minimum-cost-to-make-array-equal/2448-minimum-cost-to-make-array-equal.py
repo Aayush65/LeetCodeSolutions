@@ -14,7 +14,7 @@ class Solution:
             currN = 0
             for i, j in nums:
                 currN += j
-                if currN >= n // 2 + 1:
+                if currN > n // 2:
                     return calcCost(i)
         else:
             currN = 0
@@ -23,5 +23,5 @@ class Solution:
                 currN += j
                 if currN >= n // 2:
                     res = min(res, calcCost(i))
-                if currN >= n // 2 + 1:
+                if currN > n // 2:
                     return min(res, calcCost(i))
