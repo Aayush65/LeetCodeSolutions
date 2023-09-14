@@ -6,14 +6,14 @@ class Solution:
         for i, j in tickets:
             destMap[i].add(j)
         
-        itenerary = ['zzzz']
+        itenerary = []
         
         def dfs(city: str, path: list[str]) -> bool:
             if city not in destMap or not destMap[city]:
                 if len(path) != len(tickets) + 1:
                     return False
                 nonlocal itenerary
-                itenerary = min(itenerary, path)
+                itenerary = path
                 return True
 
             for i in range(len(destMap[city])):
