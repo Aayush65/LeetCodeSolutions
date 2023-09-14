@@ -6,25 +6,23 @@ class Solution:
         for i, j in tickets:
             destMap[i].add(j)
         
-        itenerary = []
+        path = ["JFK"]
         
-        def dfs(city: str, path: list[str]) -> bool:
-            if city not in destMap or not destMap[city]:
-                if len(path) != len(tickets) + 1:
-                    return False
-                nonlocal itenerary
-                itenerary = path
+        def dfs(city: str) -> bool:
+            if len(path) == len(tickets) + 1:
                 return True
+            if city not in destMap or not destMap[city]:
+                return False                
 
             for i in range(len(destMap[city])):
                 nextCity = destMap[city][i]
                 destMap[city].pop(i)
                 path.append(nextCity)
-                if dfs(nextCity, path):
+                if dfs(nextCity):
                     return True
                 path.pop()
                 destMap[city].add(nextCity)
             return False
 
-        dfs("JFK", ["JFK"])
-        return itenerary
+        dfs("JFK")
+        return path
