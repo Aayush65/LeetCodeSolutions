@@ -6,8 +6,8 @@ class Solution:
         for i in range(n):
             for j in range(i + 1, n):
                 dist = abs(points[i][0] - points[j][0]) + abs(points[i][1] - points[j][1])
-                heappush(edges[i], (dist, j))
-                heappush(edges[j], (dist, i))
+                edges[i].append((dist, j))
+                edges[j].append((dist, i))
         
         totalCost = 0
         connections = 0
