@@ -1,22 +1,22 @@
 class Solution:
-	def champagneTower(self, poured: int, query_row: int, query_glass: int) -> float:
-
-		dp = [[0]*x for x in range(1,102)]
-
-		dp[0][0] = poured
-
-		for row in range(query_row + 1):
-
-			for col in range(row + 1):
-
-				mid_pour = (dp[row][col] - 1.0) / 2.0
-
-				if mid_pour > 0:
-
-					dp[row+1][col] = dp[row+1][col] + mid_pour
-
-					dp[row+1][col+1] = dp[row+1][col+1] + mid_pour
-
-		result = min(1, dp[query_row][query_glass])
-
-		return result
+    def champagneTower(self, poured: int, query_row: int, query_glass: int) -> float:
+        currRow = [poured]
+        
+        currSum = poured
+        while currSum:
+            nextSum = 0
+            nextRow = [0] * (len(currRow) + 1)
+            if query_row == 0:
+                return 1 if currRow[query_glass] >= 1 else currRow[query_glass]
+            
+            for i in range(len(currRow)):
+                if currRow[i] <= 1:
+                    continue
+                overflow = currRow[i] - 1
+                nextRow[i] += overflow / 2
+                nextRow[i + 1] += overflow / 2
+                nextSum += overflow
+            currRow = nextRow
+            currSum = nextSum
+            query_row -= 1
+        return 0        
