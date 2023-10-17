@@ -1,6 +1,6 @@
 class Solution:
     def numSquarefulPerms(self, nums: List[int]) -> int:
-        
+                
         def dp(num: int, nums: list[int]) -> int:
             nums.remove(num)
             if not nums:
