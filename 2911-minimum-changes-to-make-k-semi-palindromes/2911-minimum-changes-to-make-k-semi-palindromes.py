@@ -1,7 +1,8 @@
 class Solution:
     def minimumChanges(self, s: str, k: int) -> int:
-        
-        @cache
+    
+        n = len(s)
+
         def semiPalindromeCost(i: int, j: int, k: int) -> int: 
             cost = 0
             n = j - i + 1
@@ -23,17 +24,12 @@ class Solution:
                     minCost = min(minCost, semiPalindromeCost(i, j, k))
             return minCost
 
-        n = len(s)
-
         @cache
         def dp(index: int, k: int) -> int:
-            if k == 0 and index == n:
-                return 0
-            if k == 0 or index == n:
-                return float("inf")
+            if k == 1:
+                return palindromeCost(index, n - 1)
             res = float("inf")
             for i in range(index + 1, n):
-                # print(s[index: i + 1], palindromeCost(index, i))
                 res = min(res, palindromeCost(index, i) + dp(i + 1, k - 1))
             return res
 
