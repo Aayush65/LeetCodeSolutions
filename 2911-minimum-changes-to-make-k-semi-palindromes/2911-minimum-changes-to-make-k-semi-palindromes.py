@@ -32,6 +32,5 @@ class Solution:
             for i in range(index + 1, n):
                 res = min(res, palindromeCost(index, i) + dp(i + 1, k - 1))
             return res
-
-        res = dp(0, k)
-        return -1 if res == float("inf") else res
+        
+        return dp(0, k)
