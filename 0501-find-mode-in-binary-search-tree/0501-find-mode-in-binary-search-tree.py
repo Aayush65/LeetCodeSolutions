@@ -8,24 +8,26 @@ class Solution:
     def findMode(self, root: Optional[TreeNode]) -> List[int]:
         
         iot = []
-        def IOTraversal(node: TreeNode) -> None:
+        def IOTraversal(node: TreeNode) -> list[int, set[int]]:
             if node.left:
                 IOTraversal(node.left)
             iot.append(node.val)
             if node.right:
                 IOTraversal(node.right)
+                
         IOTraversal(root)
         
-        freq = {i: 0 for i in iot}
+        maxFreq = freq = 0
+        curr = iot[0]
+        res = []
         for i in iot:
-            freq[i] += 1
-        
-        maxApp = 0
-        mode = [iot[0]]
-        for i in freq:
-            if maxApp < freq[i]:
-                maxApp = freq[i]
-                mode = [i]
-            elif maxApp == freq[i]:
-                mode.append(i)
-        return mode
+            if i != curr:
+                curr = i
+                freq = 0
+            freq += 1
+            if freq == maxFreq:
+                res.append(curr)
+            if freq > maxFreq:
+                maxFreq = freq
+                res = [curr]
+        return res
