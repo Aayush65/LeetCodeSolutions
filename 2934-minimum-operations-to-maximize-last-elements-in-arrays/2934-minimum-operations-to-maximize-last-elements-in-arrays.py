@@ -7,11 +7,8 @@ class Solution:
         # count1: the ends are original
         # count2: the ends are exchanged
         count1 = 0
-        count2 = 1
-        for k in range(n - 1):
-            i, j = nums1[k], nums2[k]
-            if max(i, j) <= min(nums1[-1], nums2[-1]):
-                continue
+        count2 = 0
+        for i, j in zip(nums1, nums2):
             if min(i, j) > min(nums1[-1], nums2[-1]) or max(i, j) > max(nums1[-1], nums2[-1]):
                 return -1
             if i > nums1[-1] or j > nums2[-1]:
