@@ -1,14 +1,19 @@
 class MyCalendarTwo:
 
     def __init__(self):
-        self.time = defaultdict(int)
+        from sortedcontainers import SortedDict
+        self.time = SortedDict({})
 
     def book(self, start: int, end: int) -> bool:
+        if start not in self.time:
+            self.time[start] = 0
+        if end not in self.time:
+            self.time[end] = 0
         self.time[start] += 1
         self.time[end] -= 1
         
         total = 0
-        for i in sorted(self.time.keys()):
+        for i in self.time:
             total += self.time[i]
             if total == 3:
                 self.time[start] -= 1
