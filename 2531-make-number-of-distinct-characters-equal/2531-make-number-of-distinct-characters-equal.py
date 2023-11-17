@@ -1,16 +1,14 @@
 class Solution:
     def isItPossible(self, word1: str, word2: str) -> bool:
-        indexOf = lambda x: ord(x) - ord('a')
         
-        freq1 = {indexOf(i): 0 for i in word1}
+        freq1 = {i: 0 for i in word1}
         for i in word1:
-            freq1[indexOf(i)] += 1
-        freq2 = {indexOf(i): 0 for i in word2}
+            freq1[i] += 1
+        freq2 = {i: 0 for i in word2}
         for i in word2:
-            freq2[indexOf(i)] += 1
+            freq2[i] += 1
             
         def swap(i: int, j: int):
-            i, j = indexOf(i), indexOf(j)
             if i not in freq2:
                 freq2[i] = 0
             freq2[i] += 1
@@ -32,4 +30,3 @@ class Solution:
                     return True
                 swap(j, i)
         return False
-        
