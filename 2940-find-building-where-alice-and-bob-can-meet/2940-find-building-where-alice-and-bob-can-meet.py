@@ -65,12 +65,9 @@ class Solution:
                 res.append(b)
                 continue
             
-            ans = n
+            ans = -1
             l, r = b + 1, n
-            if l == r:
-                res.append(-1)
-                continue
-            maxR = st.query(l, r)
+            maxR = st.query(l, r) if l < r else 0
             while maxR > heights[a]:
                 indexLoc = bisect_left(indexMap[maxR], l)
                 r = indexMap[maxR][indexLoc]
@@ -78,8 +75,5 @@ class Solution:
                 if l >= r:
                     break
                 maxR = st.query(l, r)
-            if ans == n:
-                res.append(-1)
-            else:
-                res.append(ans)
+            res.append(ans)
         return res
