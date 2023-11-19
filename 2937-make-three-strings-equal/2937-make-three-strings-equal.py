@@ -5,4 +5,5 @@ class Solution:
                 i += 1
             else:
                 break
+
         return len(s1) + len(s2) + len(s3) - 3 * i if i else -1
