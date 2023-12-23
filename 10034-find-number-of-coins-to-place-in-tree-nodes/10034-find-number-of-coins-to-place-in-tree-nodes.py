@@ -6,29 +6,24 @@ class Solution:
             nodeMap[i].add(j)
             nodeMap[j].add(i)
             
-        coins = [0] * n
+        coins = [1] * n
     
         visited = set()
-        def traverse(node: int) -> None:
-            allAllVals = []
+        def dfs(node: int) -> None:
+            allVals = [cost[node]]
             visited.add(node)
             for child in nodeMap[node]:
                 if child in visited:
                     continue
-                allAllVals.append(traverse(child))
+                allVals.extend(dfs(child))
 
-            allVals = []
-            for allVal in allAllVals:
-                allVals.extend(allVal)
-            allVals.append(cost[node])
             allVals.sort()
-
-            if len(allVals) < 3:
-                coins[node] = 1
-            else:
-                maxProd = max(allVals[0] * allVals[1] * allVals[-1], allVals[-3] * allVals[-2] * allVals[-1], 0)
+            if len(allVals) > 2:
+                allPos = allVals[-3] * allVals[-2] * allVals[-1]
+                twoNegOnePos = allVals[0] * allVals[1] * allVals[-1]
+                maxProd = max(allPos, twoNegOnePos, 0)
                 coins[node] = maxProd
             return allVals
 
-        traverse(0)
+        dfs(0)
         return coins
