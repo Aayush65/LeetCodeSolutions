@@ -6,10 +6,10 @@ class Solution:
             if index == len(s):
                 return prevCount if prevCount < 2 else len(str(prevCount)) + 1
             if s[index] == prev:
-                res = dp(index + 1, prev, prevCount + 1, k)
-            else:
-                res = prevCount if prevCount < 2 else len(str(prevCount)) + 1
-                res += dp(index + 1, s[index], 1, k)
+                return dp(index + 1, prev, prevCount + 1, k)
+            
+            res = prevCount if prevCount < 2 else len(str(prevCount)) + 1
+            res += dp(index + 1, s[index], 1, k)
             if k:
                 res = min(res, dp(index + 1, prev, prevCount, k - 1))
             return res
